@@ -34,7 +34,11 @@ Nystagmus, low vision, dyslexia, or just tired eyes — row differentiation shou
 ## Usage
 
 - Click the extension icon to open the popup with all controls
+<img width="250" height="433" alt="image" src="https://github.com/user-attachments/assets/a27f0a18-d765-4f9d-a440-5c1bb60793c9" />
+
 - Right-click any table → **Toggle zebra stripes on this table**
+<img width="467" height="233" alt="image" src="https://github.com/user-attachments/assets/b16da0d5-b74a-460c-ad73-e75a7f053af0" />
+
 - Settings are saved per-site automatically
 
 ## License
