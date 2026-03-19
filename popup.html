@@ -1,93 +1,338 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
   body {
-    width: 220px;
-    padding: 12px;
+    width: 300px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 13px;
-    color: #333;
+    color: #222;
+    background: #f8f9fa;
   }
-  h3 {
-    margin: 0 0 10px 0;
+
+  /* ── Header ── */
+  .header {
+    background: #1a73e8;
+    color: white;
+    padding: 12px 14px 10px;
+  }
+  .header h1 {
     font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
   }
+  .header .site-label {
+    font-size: 11px;
+    opacity: 0.8;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ── Sections ── */
+  .section {
+    background: white;
+    border-bottom: 1px solid #e8eaed;
+    padding: 10px 14px;
+  }
+  .section-title {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #80868b;
+    margin-bottom: 8px;
+  }
+
+  /* ── Toggle row ── */
   .row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 6px 0;
+    padding: 3px 0;
   }
+  .row-label {
+    color: #3c4043;
+    font-size: 13px;
+  }
+  .row-label.muted { color: #80868b; font-size: 12px; }
+
+  /* ── Toggle switch ── */
   .toggle {
     position: relative;
-    width: 40px;
-    height: 22px;
+    width: 38px;
+    height: 21px;
+    flex-shrink: 0;
   }
-  .toggle input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
+  .toggle input { opacity: 0; width: 0; height: 0; }
   .slider {
     position: absolute;
     inset: 0;
-    background: #ccc;
-    border-radius: 22px;
+    background: #dadce0;
+    border-radius: 21px;
     cursor: pointer;
     transition: 0.2s;
   }
   .slider::before {
     content: "";
     position: absolute;
-    height: 16px;
-    width: 16px;
-    left: 3px;
-    bottom: 3px;
+    height: 15px; width: 15px;
+    left: 3px; bottom: 3px;
     background: white;
     border-radius: 50%;
     transition: 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
   }
-  input:checked + .slider {
-    background: #4285f4;
+  input:checked + .slider { background: #1a73e8; }
+  input:checked + .slider::before { transform: translateX(17px); }
+
+  /* ── Method picker ── */
+  .method-group {
+    display: flex;
+    gap: 6px;
   }
-  input:checked + .slider::before {
-    transform: translateX(18px);
-  }
-  hr {
-    border: none;
-    border-top: 1px solid #eee;
-    margin: 8px 0;
-  }
-  .site {
-    color: #666;
+  .method-btn {
+    flex: 1;
+    padding: 5px 4px;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    background: white;
     font-size: 11px;
-    word-break: break-all;
+    font-weight: 500;
+    color: #3c4043;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.15s;
+  }
+  .method-btn:hover { border-color: #1a73e8; color: #1a73e8; }
+  .method-btn.active {
+    background: #e8f0fe;
+    border-color: #1a73e8;
+    color: #1a73e8;
+  }
+  .method-desc {
+    font-size: 10px;
+    color: #80868b;
+    margin-top: 5px;
+    line-height: 1.4;
+  }
+
+  /* ── Colour section ── */
+  .preset-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .preset-row label { font-size: 11px; color: #80868b; white-space: nowrap; }
+  select#presetSelect {
+    flex: 1;
+    padding: 4px 6px;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #3c4043;
+    background: white;
+    cursor: pointer;
+  }
+  select#presetSelect:focus { outline: none; border-color: #1a73e8; }
+
+  .color-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .color-item label {
+    font-size: 10px;
+    color: #80868b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .color-item input[type="color"] {
+    width: 36px;
+    height: 28px;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 2px;
+    background: white;
+  }
+  .color-item input[type="color"]:hover { border-color: #1a73e8; }
+
+  /* ── Site colour override ── */
+  .site-override-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #e8eaed;
+  }
+  .site-override-row label {
+    font-size: 11px;
+    color: #80868b;
+  }
+  .link-btn {
+    font-size: 11px;
+    color: #1a73e8;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+  }
+  .link-btn:hover { color: #0d47a1; }
+
+  /* ── Table list ── */
+  .table-list {
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  .table-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    border-bottom: 1px solid #f1f3f4;
+  }
+  .table-item:last-child { border-bottom: none; }
+  .table-caption {
+    font-size: 11px;
+    color: #3c4043;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+  }
+  .table-caption .table-rows {
+    color: #80868b;
+    font-size: 10px;
+    margin-left: 4px;
+  }
+  .table-list-empty {
+    font-size: 11px;
+    color: #80868b;
+    font-style: italic;
+  }
+
+  .clear-btn {
+    font-size: 11px;
+    color: #e74c3c;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 6px;
+    text-decoration: underline;
+  }
+  .clear-btn:hover { color: #c0392b; }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 6px 14px;
+    font-size: 10px;
+    color: #bdc1c6;
+    text-align: center;
   }
 </style>
 </head>
 <body>
-  <h3>🦓 Zebra Tables</h3>
 
+<!-- Header -->
+<div class="header">
+  <h1>ICFS — Tables</h1>
+  <div class="site-label" id="siteLabel">Loading...</div>
+</div>
+
+<!-- Global + Site toggles -->
+<div class="section">
+  <div class="section-title">Enable</div>
   <div class="row">
-    <span>Global</span>
+    <span class="row-label">Global</span>
     <label class="toggle">
       <input type="checkbox" id="globalToggle">
       <span class="slider"></span>
     </label>
   </div>
-
-  <hr>
-
-  <div class="site" id="siteLabel"></div>
-  <div class="row">
-    <span>This site</span>
+  <div class="row" style="margin-top: 4px;">
+    <span class="row-label">This site</span>
     <label class="toggle">
       <input type="checkbox" id="siteToggle">
       <span class="slider"></span>
     </label>
   </div>
+</div>
 
-  <script src="popup.js"></script>
+<!-- Striping method -->
+<div class="section">
+  <div class="section-title">Method</div>
+  <div class="method-group">
+    <button class="method-btn active" data-method="js">JS</button>
+    <button class="method-btn" data-method="css">CSS</button>
+    <button class="method-btn" data-method="auto">Auto</button>
+  </div>
+  <div class="method-desc" id="methodDesc">
+    JS: Walks the DOM and injects inline styles. Works on legacy ASP/iframe pages.
+  </div>
+</div>
+
+<!-- Colours -->
+<div class="section">
+  <div class="section-title">Colours</div>
+  <div class="preset-row">
+    <label for="presetSelect">Preset</label>
+    <select id="presetSelect">
+      <option value="blue">Blue (default)</option>
+      <option value="green">Green</option>
+      <option value="grey">Grey</option>
+      <option value="purple">Purple</option>
+      <option value="contrast">High Contrast</option>
+      <option value="custom">Custom</option>
+    </select>
+  </div>
+  <div class="color-grid">
+    <div class="color-item">
+      <label>Odd</label>
+      <input type="color" id="colorOdd" value="#ffffff">
+    </div>
+    <div class="color-item">
+      <label>Even</label>
+      <input type="color" id="colorEven" value="#dce8fc">
+    </div>
+    <div class="color-item">
+      <label>Hover</label>
+      <input type="color" id="colorHover" value="#b8d1f5">
+    </div>
+  </div>
+  <div class="site-override-row">
+    <label id="siteColorLabel">Using: global colours</label>
+    <button class="link-btn" id="siteColorBtn">Use for this site</button>
+  </div>
+</div>
+
+<!-- Tables on this page -->
+<div class="section">
+  <div class="section-title">Tables on this page</div>
+  <div class="table-list" id="tableList">
+    <div class="table-list-empty">No tables found.</div>
+  </div>
+  <button class="clear-btn" id="clearOverridesBtn" style="display:none">
+    Clear individual overrides
+  </button>
+</div>
+
+<div class="footer">v2.0</div>
+
+<script src="popup.js"></script>
 </body>
 </html>

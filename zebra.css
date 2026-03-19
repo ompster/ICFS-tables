@@ -1,8 +1,25 @@
-/* Hover effect — CSS handles this since JS inline styles + hover don't mix */
+/* ICFS - Tables v2.0 — zebra.css
+   CSS-method stripes + hover for all methods.
+   JS method overrides these with inline styles (higher specificity via !important).
+   CSS vars are injected by content.js via <style id="zebra-injected-style">. */
 
-body[data-zebra-tables="on"] table tr[data-zebra-role="data"]:hover td,
-body[data-zebra-tables="on"] table tr[data-zebra-role="data"]:hover th,
-body[data-zebra-tables="on"] table tr[data-zebra-role="data"]:hover {
+/* Hover effect works for all methods via CSS */
+[data-zebra="on"] table[data-zebra-table] tr[data-zebra-role="data"]:hover td,
+[data-zebra="on"] table[data-zebra-table] tr[data-zebra-role="data"]:hover th,
+[data-zebra="on"] table[data-zebra-table] tr[data-zebra-role="data"]:hover {
   background-color: #b8d1f5 !important;
   transition: background-color 0.15s ease;
+}
+
+/* CSS method: even/odd colouring via data attributes stamped by content.js */
+[data-zebra="on"] table[data-zebra-table] tr[data-zebra-index="odd"] td,
+[data-zebra="on"] table[data-zebra-table] tr[data-zebra-index="odd"] th,
+[data-zebra="on"] table[data-zebra-table] tr[data-zebra-index="odd"] {
+  background-color: #ffffff;
+}
+
+[data-zebra="on"] table[data-zebra-table] tr[data-zebra-index="even"] td,
+[data-zebra="on"] table[data-zebra-table] tr[data-zebra-index="even"] th,
+[data-zebra="on"] table[data-zebra-table] tr[data-zebra-index="even"] {
+  background-color: #dce8fc;
 }

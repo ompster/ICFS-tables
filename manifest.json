@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Zebra Tables",
-  "version": "1.1",
-  "description": "Alternating row colours on HTML tables for easier reading",
-  "permissions": ["storage", "activeTab"],
+  "name": "ICFS - Tables",
+  "version": "2.0",
+  "description": "Because some tables are impossible to read. Alternating row colours and hover highlighting for any HTML table.",
+  "permissions": ["storage", "activeTab", "contextMenus", "tabs", "webNavigation"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -11,6 +11,9 @@
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     }
+  },
+  "background": {
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
