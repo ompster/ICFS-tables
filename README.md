@@ -4,6 +4,12 @@
 
 Alternating row colours and hover highlighting for any HTML table. A lightweight Chrome/Edge extension that makes reading tables bearable.
 
+## Why?
+
+Built by someone with congenital nystagmus who was sick of losing their place in tables. If you've ever struggled to track a row across 15 columns of white-on-white nothing, this is for you.
+
+Nystagmus, low vision, dyslexia, or just tired eyes — row differentiation shouldn't be optional. Web developers keep forgetting that, so here we are.
+
 ## Features
 
 - 🦓 **Alternating row colours** on any HTML table
@@ -15,7 +21,8 @@ Alternating row colours and hover highlighting for any HTML table. A lightweight
   - **JS injection** (default) — walks the DOM and applies inline styles. Works on everything, including old ASP pages, iframes, and sites that fight back with inline styles
   - **CSS only** — lightweight nth-child selectors for well-behaved pages
   - **Auto** — tries CSS first, falls back to JS if needed
-- 🖼️ **iframe/frame support** — works inside frames (looking at you, Autotask)
+- 🖼️ **iframe/frame support** — works inside frames (looking at you, legacy enterprise apps)
+- ♿ **Accessibility-first** — not a gimmick, a genuine tool for people who need it
 
 ## Install
 
@@ -29,10 +36,6 @@ Alternating row colours and hover highlighting for any HTML table. A lightweight
 - Click the extension icon to open the popup with all controls
 - Right-click any table → **Toggle zebra stripes on this table**
 - Settings are saved per-site automatically
-
-## Why?
-
-Because web developers keep building tables with zero visual distinction between rows and expecting humans to track data across 15 columns of white-on-white nothing.
 
 ## License
 
