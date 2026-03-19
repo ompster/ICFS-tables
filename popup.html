@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    width: 220px;
+    padding: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: #333;
+  }
+  h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+  }
+  .toggle {
+    position: relative;
+    width: 40px;
+    height: 22px;
+  }
+  .toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .slider {
+    position: absolute;
+    inset: 0;
+    background: #ccc;
+    border-radius: 22px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .slider::before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.2s;
+  }
+  input:checked + .slider {
+    background: #4285f4;
+  }
+  input:checked + .slider::before {
+    transform: translateX(18px);
+  }
+  hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 8px 0;
+  }
+  .site {
+    color: #666;
+    font-size: 11px;
+    word-break: break-all;
+  }
+</style>
+</head>
+<body>
+  <h3>🦓 Zebra Tables</h3>
+
+  <div class="row">
+    <span>Global</span>
+    <label class="toggle">
+      <input type="checkbox" id="globalToggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <hr>
+
+  <div class="site" id="siteLabel"></div>
+  <div class="row">
+    <span>This site</span>
+    <label class="toggle">
+      <input type="checkbox" id="siteToggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+/* Hover effect — CSS handles this since JS inline styles + hover don't mix */
+
+body[data-zebra-tables="on"] table tr[data-zebra-role="data"]:hover td,
+body[data-zebra-tables="on"] table tr[data-zebra-role="data"]:hover th,
+body[data-zebra-tables="on"] table tr[data-zebra-role="data"]:hover {
+  background-color: #b8d1f5 !important;
+  transition: background-color 0.15s ease;
+}
